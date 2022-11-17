@@ -1,0 +1,101 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Application Template: Demonstrates how to reference resources from a different stack.
+  This template provisions an EC2 instance in a VPC Subnet provisioned in a different stack.
+
+# This template creates:
+#   Amazon EC2 instance
+#   Security Group
+
+######################
+# Parameters section
+######################
+
+Parameters:
+
+  NetworkStackName:
+    Description: >-
+      Name of an active CloudFormation stack that contains the networking
+      resources, such as the VPC and subnet that will be used in this stack.
+    Type: String
+    MinLength: 1
+    MaxLength: 255
+    AllowedPattern: '^[a-zA-Z][-a-zA-Z0-9]*$'
+    Default: lab-network
+
+  AmazonLinuxAMIID:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2
+
+  InstanceTypeParameter:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t3.micro
+    Description: Enter t2.micro or t3.micro. Default is t2.micro. 
+  
+  LaunchTemplateVersionNumber:
+    Default: 1
+    Type: String
+
+
+######################
+# Resources section
+######################
+
+Resources:
+
+## Security Group
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+       GroupDescription: Open HTTP (port 80)
+       VpcId:   
+        Fn::ImportValue: !Sub ${NetworkStackName}-VPCID
+       SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  ## Launch Template
+
+  LaunchTemplate:
+    Type: 'AWS::EC2::LaunchTemplate'
+    Properties:
+      LaunchTemplateData:
+        NetworkInterfaces:
+          - DeviceIndex: 0
+            AssociatePublicIpAddress: true
+            Groups:
+              - !Ref InstanceSecurityGroup
+            DeleteOnTermination: true
+        Placement:
+          Tenancy: default
+        ImageId: !Ref AmazonLinuxAMIID
+        InstanceType: !Ref InstanceTypeParameter
+        UserData:
+          Fn::Base64:
+            !Sub |
+              #!/bin/bash
+              sudo yum update -y
+              sudo amazon-linux-extras install nginx1 -y 
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
+
+  ## Autoscaling Group
+
+  AutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      MinSize: '2'
+      MaxSize: '4'
+      DesiredCapacity: '2'
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LaunchTemplate
+        Version: !Ref LaunchTemplateVersionNumber
+      VPCZoneIdentifier:
+        - Fn::ImportValue: !Sub ${NetworkStackName}-SubnetID1
+        - Fn::ImportValue: !Sub ${NetworkStackName}-SubnetID2
