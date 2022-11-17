@@ -166,6 +166,8 @@ Resources:
     Type: 'AWS::EC2::LaunchTemplate'
     Properties:
       LaunchTemplateData:
+        ImageId: !Ref AmazonLinuxAMIID
+        InstanceType: !Ref InstanceTypeParameter
         NetworkInterfaces:
           - DeviceIndex: 0
             AssociatePublicIpAddress: true
@@ -174,8 +176,6 @@ Resources:
             DeleteOnTermination: true
         Placement:
           Tenancy: default
-        ImageId: !Ref AmazonLinuxAMIID
-        InstanceType: !Ref InstanceTypeParameter
         UserData:
           Fn::Base64:
             !Sub |
