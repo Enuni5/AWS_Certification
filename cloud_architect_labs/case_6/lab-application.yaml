@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  Application Template: Demonstrates how to reference resources from a different stack.
-  This template provisions an EC2 instance in a VPC Subnet provisioned in a different stack.
+  Application Template: This template provisions an Auto Scaling Group in 2 different VPC Subnets 
+  provisioned in a different stack, that launches instances from a Launch Template.
 
 # This template creates:
 #   Amazon EC2 instance

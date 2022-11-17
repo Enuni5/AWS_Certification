@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  Network Template: Sample template that creates a VPC with DNS and public IPs enabled.
+  This template creates a VPC with DNS and public IPs enabled, 2 subnets and an Auto Scaling Group with webservers in different AZs.
 
 # This template creates:
 #   VPC
 #   Internet Gateway
-#   Public Route Table
-#   Public Subnet
+#   Public Route Tables
+#   2 Public Subnets
 #   Security Group
 #   Launch Template
 #   Autoscaling group

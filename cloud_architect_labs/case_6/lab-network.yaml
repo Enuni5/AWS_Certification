@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  Network Template: Sample template that creates a VPC with DNS and public IPs enabled.
+  Network Template: This template creates a VPC with DNS and public IPs enabled and 2 public subnets.
 
 # This template creates:
 #   VPC
