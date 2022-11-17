@@ -1,0 +1,2 @@
+# aws_certifications
+Este es un repositorio para guardar todo el trabajo realizado en el cloudcamp para certificacion de Amazon Cloud Practitioner y Amazon Cloud Architect por Emilio Núñez Nieto en 42 Málaga.

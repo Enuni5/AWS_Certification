@@ -1,0 +1,18 @@
+## Ignored folders
+
+cloud_practitioner_labs/caso_1/images/**
+cloud_practitioner_labs/caso_2/Images/**
+cloud_practitioner_labs/caso_3/images/**
+cloud_architect_labs/case_4/images/**
+cloud_architect_labs/case_6/images/**
+
+## Ignored individual files
+
+cloud_practitioner_labs/caso_1/Caso Práctico 1_ Infraestructura Global y Seguridad en AWS.docx
+cloud_practitioner_labs/caso_2/Caso Práctico 2_ Redes y Computación en AWS.docx
+cloud_practitioner_labs/caso_3/Caso Práctico_ Aplicación Inventario en 2 EC2 (ALB) y Base de datos MySQL en RDS.docx
+cloud_architect_labs/case_4/Caso 4. Redes y Computación en AWS.docx
+cloud_architect_labs/case_5/Caso 5. Gestión de costos en AWS.docx
+cloud_architect_labs/case_5/Presupuesto.png
+
+**/.DS_Store
