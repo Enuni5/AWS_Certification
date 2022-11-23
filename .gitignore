@@ -5,6 +5,7 @@ cloud_practitioner_labs/caso_2/Images/**
 cloud_practitioner_labs/caso_3/images/**
 cloud_architect_labs/case_4/images/**
 cloud_architect_labs/case_6/images/**
+cloud_architect_labs/case_7/images/**
 
 ## Ignored individual files
 
@@ -15,5 +16,6 @@ cloud_architect_labs/case_4/Caso 4. Redes y Computación en AWS.docx
 cloud_architect_labs/case_5/Caso 5. Gestión de costos en AWS.docx
 cloud_architect_labs/case_5/Presupuesto.png
 cloud_architect_labs/case_6/Caso Práctico 6.pdf
+cloud_architect_labs/case_7/Caso Práctico 7.pdf
 
 **/.DS_Store
